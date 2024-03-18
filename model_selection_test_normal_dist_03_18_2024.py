@@ -114,7 +114,7 @@ sm.qqplot(residual_array, line='s', ax = ax1)
 ax1.set_title('QQ Plot of Residuals')
 plt.show()
 
-f = open("test_for_normalcy_results.txt", 'w+')
+f = open("test_for_normality_results.txt", 'w+')
 
 print("\n", file = f)
 #perform Shapiro-Wilk test for normality
