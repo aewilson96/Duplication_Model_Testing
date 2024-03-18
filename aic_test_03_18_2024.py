@@ -13,7 +13,7 @@ import numpy as np
 input_likelihood = "Actual_"
 file_name_input_begin = input_likelihood
 
-file_name_input = input("Enter your csv file of your residuals and models: ") or 'neg_likelihoods_norm_03_18_2024.csv'
+file_name_input = input("Enter your csv file of your residuals and models: ") or 'likelihoods_norm_03_18_2024.csv'
 file_name_output = file_name_input_begin + 'AIC_output_norm_03_18_2024.txt'
 
 # number of elements
