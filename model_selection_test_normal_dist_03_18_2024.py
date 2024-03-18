@@ -97,8 +97,6 @@ dataset1 = np.random.normal(loc=mean, scale=sd, size=100000)
 np.random.seed(1)
 dataset2 = stats.norm.rvs(mean, sd, size=100000)
 
-dataset3 = stats.laplace.rvs(mean, sd, size=100000)
-
 #create histograms to visualize values in dataset
 plt.hist(dataset1, edgecolor='black')
 plt.title('Random Normal Distrubtion #1')
@@ -106,10 +104,6 @@ plt.show()
 
 plt.hist(dataset2, edgecolor='black')
 plt.title('Random Normal Distrubtion #2')
-plt.show()   
-
-plt.hist(dataset3, edgecolor='black')
-plt.title('Random Laplace Distrubtion #3')
 plt.show()   
 
 ###############################################################################
@@ -120,30 +114,27 @@ sm.qqplot(residual_array, line='s', ax = ax1)
 ax1.set_title('QQ Plot of Residuals')
 plt.show()
 
+f = open("test_for_normalcy_results.txt", 'w+')
 
-print("\n")
+print("\n", file = f)
 #perform Shapiro-Wilk test for normality
 shapiro_result = shapiro(residual_array)
-print("Shapiro-Wilk Test Result: ")
-print(shapiro_result)
-print("\n")
+print("Shapiro-Wilk Test Result: ", file = f)
+print(shapiro_result, file = f)
+print("\n", file = f)
 
 
 #perform Kolmogorov-Smirnov test against given datasets
 kstest_result = kstest(residual_array, dataset1)
-print("Kolmogorov-Smirnov Test For Given Random Normal Distribution #1: ")
-print(kstest_result) 
-print("\n")
+print("Kolmogorov-Smirnov Test For Given Random Normal Distribution #1 with the same mean and standard deviation as my set of residuals: ", file = f)
+print(kstest_result, file = f) 
+print("\n", file = f)
  
 
 kstest_result = kstest(residual_array, dataset2)
-print("Kolmogorov-Smirnov Test For Given Random Normal Distribution #2: ")
-print(kstest_result) 
-print("\n")
+print("Kolmogorov-Smirnov Test For Given Random Normal Distribution #2 with the same mean and standard deviation as my set of residuals: ", file = f)
+print(kstest_result, file = f) 
+print("\n", file = f)
 
-kstest_result = kstest(residual_array, dataset3)
-print("Kolmogorov-Smirnov Test For Given Random Laplace Distribution #3: ")
-print(kstest_result) 
-print("\n")
 ###############################################################################
 print("end time: " + datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
