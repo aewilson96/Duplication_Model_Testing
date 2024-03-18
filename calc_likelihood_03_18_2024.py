@@ -13,7 +13,6 @@ from datetime import datetime
 import statistics
 import numpy as np
 import scipy.stats as stats
-from scipy.stats import norm
 
 
 
@@ -81,19 +80,19 @@ ind_residual_list = []
 three_mix_mut_residual_list = []
 for each_instance in range(len(instances)):
     if instances[each_instance].model_identifier == str(0):
-        three_mix_dup_residual_list.append(float(instances[each_instance].residual))
+        three_mix_dup_residual_list.append(-1*abs(float(instances[each_instance].residual)))
     elif instances[each_instance].model_identifier == str(1):
-        alt_dos_dup_residual_list.append(float(instances[each_instance].residual))
+        alt_dos_dup_residual_list.append(-1*abs(float(instances[each_instance].residual)))
     elif instances[each_instance].model_identifier == str(2):
-        alt_non_dup_residual_list.append(float(instances[each_instance].residual))
+        alt_non_dup_residual_list.append(-1*abs(float(instances[each_instance].residual)))
     elif instances[each_instance].model_identifier == str(3):
-        non_dos_dup_residual_list.append(float(instances[each_instance].residual))
+        non_dos_dup_residual_list.append(-1*abs(float(instances[each_instance].residual)))
     elif instances[each_instance].model_identifier == str(4):
-        alt_non_mut_residual_list.append(float(instances[each_instance].residual))
+        alt_non_mut_residual_list.append(-1*abs(float(instances[each_instance].residual)))
     elif instances[each_instance].model_identifier == str(5):
-        ind_residual_list.append(float(instances[each_instance].residual))
+        ind_residual_list.append(-1*abs(float(instances[each_instance].residual)))
     elif instances[each_instance].model_identifier == str(6):
-        three_mix_mut_residual_list.append(float(instances[each_instance].residual))    
+        three_mix_mut_residual_list.append(-1*abs(float(instances[each_instance].residual)))
     else:
         pass
 ###############################################################################
@@ -104,13 +103,13 @@ print("Mean: " + str(mean) + "\n")
 print("Standard Deviation: " + str(sd) + "\n")
 
 for i in range(number_of_models):
-    three_mix_dup_likelihood =  np.prod(norm.cdf(three_mix_dup_residual_list, loc=mean, scale=sd))
-    alt_dos_dup_likelihood =    np.prod(norm.cdf(alt_dos_dup_residual_list, loc=mean, scale=sd))
-    alt_non_dup_likelihood =    np.prod(norm.cdf(alt_non_dup_residual_list, loc=mean, scale=sd))
-    non_dos_dup_likelihood =    np.prod(norm.cdf(non_dos_dup_residual_list, loc=mean, scale=sd))
-    alt_non_mut_likelihood =    np.prod(norm.cdf(alt_non_mut_residual_list, loc=mean, scale=sd))
-    ind_likelihood =            np.prod(norm.cdf(ind_residual_list, loc=mean, scale=sd))
-    three_mix_mut_likelihood =  np.prod(norm.cdf(three_mix_mut_residual_list, loc=mean, scale=sd))
+    three_mix_dup_likelihood =  np.prod(stats.norm.cdf(three_mix_dup_residual_list, loc=mean, scale=sd))
+    alt_dos_dup_likelihood =    np.prod(stats.norm.cdf(alt_dos_dup_residual_list, loc=mean, scale=sd))
+    alt_non_dup_likelihood =    np.prod(stats.norm.cdf(alt_non_dup_residual_list, loc=mean, scale=sd))
+    non_dos_dup_likelihood =    np.prod(stats.norm.cdf(non_dos_dup_residual_list, loc=mean, scale=sd))
+    alt_non_mut_likelihood =    np.prod(stats.norm.cdf(alt_non_mut_residual_list, loc=mean, scale=sd))
+    ind_likelihood =            np.prod(stats.norm.cdf(ind_residual_list, loc=mean, scale=sd))
+    three_mix_mut_likelihood =  np.prod(stats.norm.cdf(three_mix_mut_residual_list, loc=mean, scale=sd))
     file_output = 'likelihoods_norm_03_18_2024.csv'
 
 likelihoods = [three_mix_dup_likelihood, alt_dos_dup_likelihood, alt_non_dup_likelihood, non_dos_dup_likelihood, alt_non_mut_likelihood, ind_likelihood, three_mix_mut_likelihood]
